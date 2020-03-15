@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Row, Col, Card } from 'react-bootstrap'
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { requestImages } from "../../actions/gallery";
 
 const Gallery = () => {
