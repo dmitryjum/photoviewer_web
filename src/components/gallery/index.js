@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Card } from 'react-bootstrap'
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { requestImages } from "../../actions/gallery";
 
 const Gallery = () => {
   let images = useSelector(state => state.images.records)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(requestImages());
+  }, [dispatch])
 
   return (
     <Row>
