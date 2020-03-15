@@ -1,0 +1,1 @@
+export const PHOTOVIEWER_API_LOCAL_HOST = "http://localhost:3001";

@@ -1,25 +1,19 @@
 import React from 'react';
-import { Row, Col, Card, Button } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
+import { useSelector } from "react-redux";
 
 const Gallery = () => {
+  let images = useSelector(state => state.images.records)
 
   return (
     <Row>
-      <Col>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="https://picsum.photos/id/70/100/100" />
-        </Card>
-      </Col>
-      <Col>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="https://picsum.photos/id/844/100/100" />
-        </Card>
-      </Col>
-      <Col>
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="https://picsum.photos/id/130/100/100" />
-        </Card>
-      </Col>
+      {images.map((image, id) => (
+        <Col key={id}>
+          <Card style={{ width: "18rem" }}>
+            <Card.Img variant="top" src={`${image.url}/200/200`} />
+          </Card>
+        </Col>
+      ))}
     </Row>
   );
 }

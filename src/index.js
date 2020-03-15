@@ -6,15 +6,21 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from 'react-bootstrap';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from "react-redux";
+import configureStore from "./store";
+
+const store = configureStore();
 
 const Layout = () => {
 
   return(
-    <Router>
-      <Container>
-        <Route exect path="/" component={Home} />
-      </Container>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Container>
+          <Route exect path="/" component={Home} />
+        </Container>
+      </Router>
+    </Provider>
   )
 }
 
