@@ -9,9 +9,7 @@ const DimensionFilters = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    PVApi.getDimensions().then(resp => {
-      setDimensions(resp.data.dimensions)
-    });
+    PVApi.getDimensions().then(resp => setDimensions(resp.data.dimensions));
   }, [setDimensions])
 
   
