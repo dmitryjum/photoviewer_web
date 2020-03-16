@@ -1,15 +1,35 @@
-import React from 'react'
-import { ButtonGroup, Button } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { ButtonGroup, Button, Row } from 'react-bootstrap'
+import PVApi from "../../utils/api";
+import { useDispatch } from "react-redux";
+import { requestImages } from "../../actions/gallery";
+
 const DimensionFilters = () => {
+  const [dimensions, setDimensions] = useState([])
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    PVApi.getDimensions().then(resp => setDimensions(resp.data.dimensions));
+  }, [setDimensions])
+
+  
+
   return (
-    <>
+    <Row>
       <ButtonGroup vertical>
-        <Button size='lg'>Button</Button>
-        <Button size='lg'>Button</Button>
-        <Button size='lg'>Button</Button>
-        <Button size='lg'>Button</Button>
+        {
+          dimensions.map((dim, id) => (
+            <Button
+              key={id}
+              size="lg"
+              onClick={() => dispatch(requestImages({dimensions: dim}))}
+            >
+                {dim}
+            </Button>
+          ))
+        }
       </ButtonGroup>
-    </>
+    </Row>
   );
 }
 

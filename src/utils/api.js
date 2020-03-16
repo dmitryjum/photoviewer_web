@@ -7,6 +7,10 @@ class PVApi {
       params: params
     });
   }
+
+  static getDimensions() {
+    return axios.get(`${constants.PHOTOVIEWER_API_LOCAL_HOST}/v1/images/dimensions`)
+  }
 }
 
 export default PVApi
