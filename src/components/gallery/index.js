@@ -1,16 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col, Card, Spinner } from 'react-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
-import { requestImages } from "../../actions/gallery";
+import { requestImages, addMoreImages } from "../../actions/gallery";
 
 const Gallery = () => {
   let images = useSelector(state => state.images.records)
+  let loading = useSelector(state => state.images.loading)
+  let galleryPage = useSelector(state => state.images.galleryPage)
+  let totalPages = useSelector(state => state.images.totalPages)
+
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    function onScroll() {
+      const currentCur = window.innerHeight + document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.offsetHeight;
+      if (currentCur === windowHeight && galleryPage < totalPages) {
+        dispatch(addMoreImages());
+      }
+    }
+
     dispatch(requestImages());
-  }, [dispatch])
+    window.addEventListener("scroll", onScroll);
+  }, [dispatch, galleryPage, totalPages])
 
   function loadingSpinner() {
     if (loading) {
