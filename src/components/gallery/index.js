@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { Row, Col, Card, Spinner } from 'react-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
 import { requestImages, addMoreImages, imagePainted } from "../../actions/gallery";
+import { Link } from 'react-router-dom';
 
 const Gallery = () => {
   const images = useSelector(state => state.images.records)
@@ -66,7 +67,9 @@ const Gallery = () => {
         {images.map((image, id) => (
           <Col key={id}>
             <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={`${image.url}/200/200`} onLoad={() => dispatch(imagePainted())} />
+              <Link to={`/${image.id}`}>
+                <Card.Img variant="top" src={`${image.url}/200/200`} onLoad={() => dispatch(imagePainted())} />
+              </Link>
             </Card>
           </Col>
         ))}

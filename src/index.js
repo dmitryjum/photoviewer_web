@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './components/home';
+import ImageShow from './components/imageShow';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from 'react-bootstrap';
@@ -17,7 +18,8 @@ const Layout = () => {
     <Provider store={store}>
       <Router>
         <Container>
-          <Route exect path="/" component={Home} />
+            <Route exect path="/" component={Home} />
+            <Route path="/:id" component={ImageShow} />
         </Container>
       </Router>
     </Provider>
