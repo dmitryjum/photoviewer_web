@@ -3,6 +3,7 @@ export const REQUEST_IMAGES = 'REQUEST_IMAGES';
 export const SET_FILTER = 'SET_FILTER';
 export const ADD_IMAGES = 'ADD_IMAGES';
 export const LOADING = 'LOADING';
+export const ADD_ONE_TO_PAINTED_COUNTER = 'ADD_ONE_TO_PAINTED_COUNTER';
 
 export function requestImages(params = {}) {
   return (dispatch, getState) => {
@@ -34,16 +35,19 @@ export function addMoreImages(params = {}) {
       'page': getState().images.galleryPage + 1,
       'per_page': getState().images.perPage
     };
-    console.log(params)
-    if (getState().images.records.length < getState().images.entriesCount) {
-      dispatch(setLoadingSpinnerThunk({loading: true}))
-      PVApi.getImages(params)
-        .then(resp => {
-          dispatch(addImagesThunk(resp));
-          dispatch(setLoadingSpinnerThunk({loading: false}))
-        })
-        .catch(error => imagesFetchError(error))
-    }
+    dispatch(setLoadingSpinnerThunk({loading: true}))
+    PVApi.getImages(params)
+      .then(resp => {
+        dispatch(addImagesThunk(resp));
+        dispatch(setLoadingSpinnerThunk({loading: false}))
+      })
+      .catch(error => imagesFetchError(error))
+  }
+}
+
+export function imagePainted() {
+  return {
+    type: ADD_ONE_TO_PAINTED_COUNTER
   }
 }
 
