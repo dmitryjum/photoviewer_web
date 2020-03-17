@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Row, Col, Card, Spinner } from 'react-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
 import { requestImages, addMoreImages } from "../../actions/gallery";
@@ -6,33 +6,31 @@ import { requestImages, addMoreImages } from "../../actions/gallery";
 const Gallery = () => {
   const images = useSelector(state => state.images.records)
   const loading = useSelector(state => state.images.loading)
-  const galleryPage = useSelector(state => state.images.galleryPage)
-  const totalPages = useSelector(state => state.images.totalPages)
-  const entriesCount =  useSelector(state => state.images.entriesCount)
-  const onScrollCb = onScroll.bind(this)
+  const entriesCountInDB =  useSelector(state => state.images.entriesCount)
+  const loadedImagesCount = images.length
 
   const dispatch = useDispatch();
 
-  function onScroll(e, loadedImagesCount, entriesCount) {
+  const onScrollHandler = useCallback((e) => {
     e.stopPropagation()
-    // const currentCur = window.innerHeight + document.documentElement.scrollTop;
-    // const windowHeight = document.documentElement.offsetHeight;
-    console.log("images length", loadedImagesCount)
-    console.log("entriesCount", entriesCount)
-    if (loadedImagesCount < entriesCount && window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-      console.log('gallery page', galleryPage)
+    const currentCur = window.innerHeight + document.documentElement.scrollTop;
+    const windowHeight = document.documentElement.offsetHeight;
+    console.log('loaded images count', loadedImagesCount);
+    console.log('entries count', entriesCountInDB);
+    console.log('loading', loading)
+    if (loading === false && loadedImagesCount < entriesCountInDB && currentCur === windowHeight) {
       dispatch(addMoreImages());
     }
-  }
+  }, [dispatch, loading, loadedImagesCount, entriesCountInDB])
   
   useEffect(() => {
-    if (totalPages === null) { dispatch(requestImages()) }
-    window.addEventListener("scroll", (e) => onScrollCb(e, images.length, entriesCount));
+    if (entriesCountInDB === null) { dispatch(requestImages()) }
+    window.addEventListener("scroll", onScrollHandler);
     return () => {
-      window.removeEventListener("scroll", (e) => onScrollCb(e, images.length, entriesCount));
+      window.removeEventListener("scroll", onScrollHandler);
     }
     
-  }, [dispatch, totalPages, entriesCount, images.length, onScrollCb])
+  }, [dispatch, onScrollHandler, entriesCountInDB])
 
   function loadingSpinner() {
     if (loading) {
@@ -63,7 +61,3 @@ const Gallery = () => {
 }
 
 export default Gallery
-
-
-// window.innerHeight + document.documentElement.scrollTop ===
-//   document.documentElement.offsetHeight;
