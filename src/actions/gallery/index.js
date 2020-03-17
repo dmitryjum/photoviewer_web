@@ -34,13 +34,16 @@ export function addMoreImages(params = {}) {
       'page': getState().images.galleryPage + 1,
       'per_page': getState().images.perPage
     };
-    dispatch(setLoadingSpinnerThunk({loading: true}))
-    PVApi.getImages(params)
-      .then(resp => {
-        dispatch(addImagesThunk({...resp, galleryPage: params.page }));
-        dispatch(setLoadingSpinnerThunk({loading: false}))
-      })
-      .catch(error => imagesFetchError(error))
+    console.log(params)
+    if (getState().images.records.length < getState().images.entriesCount) {
+      dispatch(setLoadingSpinnerThunk({loading: true}))
+      PVApi.getImages(params)
+        .then(resp => {
+          dispatch(addImagesThunk(resp));
+          dispatch(setLoadingSpinnerThunk({loading: false}))
+        })
+        .catch(error => imagesFetchError(error))
+    }
   }
 }
 
