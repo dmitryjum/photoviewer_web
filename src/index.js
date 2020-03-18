@@ -18,8 +18,8 @@ const Layout = () => {
     <Provider store={store}>
       <Router>
         <Container>
-            <Route exect path="/" component={Home} />
-            <Route path="/:id" component={ImageShow} />
+            <Route exact strict path="/" component={Home} />
+            <Route path="/images/:id" component={ImageShow} />
         </Container>
       </Router>
     </Provider>

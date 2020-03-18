@@ -1,11 +1,9 @@
 import React from 'react';
 import { Row, Image } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-const ImageShow = () => {
-  let { id } = useParams();
-
+const ImageShow = (props) => {
+  const id = props.match.params.id;
   let images = useSelector(state => state.images.records)
   const thisImage = images.find(image => {
     return image.id === parseInt(id)

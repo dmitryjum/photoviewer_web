@@ -67,7 +67,7 @@ const Gallery = () => {
         {images.map((image, id) => (
           <Col key={id}>
             <Card style={{ width: "18rem" }}>
-              <Link to={`/${image.id}`}>
+              <Link to={`/images/${image.id}`}>
                 <Card.Img variant="top" src={`${image.url}/200/200`} onLoad={() => dispatch(imagePainted())} />
               </Link>
             </Card>
