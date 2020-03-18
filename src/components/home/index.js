@@ -7,14 +7,14 @@ import Gallery from '../gallery'
 const Home = () => {
     
     return(
-      <Row>
-        <Col xs lg="1">
-          <DimensionFilters />
-        </Col>
-        <Col xs lg="11">
-          <Gallery />
-        </Col>
-      </Row>
+      <>
+        <DimensionFilters />
+        <Row>
+          <Col xs lg="12">
+            <Gallery />
+          </Col>
+        </Row>
+      </>
     )
 }
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './components/home';
 import ImageShow from './components/imageShow';
+import ImageModal from './components/imageModal';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from 'react-bootstrap';
@@ -22,6 +23,7 @@ const Layout = () => {
             <Route path="/images/:id" component={ImageShow} />
         </Container>
       </Router>
+      <ImageModal />
     </Provider>
   )
 }
