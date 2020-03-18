@@ -1,6 +1,7 @@
 import React from 'react';
-import { Row, Image } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import './index.css'
 
 const ImageShow = (props) => {
   const id = props.match.params.id;
@@ -8,11 +9,11 @@ const ImageShow = (props) => {
   const thisImage = images.find(image => {
     return image.id === parseInt(id)
   })
-  console.log(thisImage)
+  const grayscale = props.location.search === '?grayscale' ? 'grayscale' : ''
   if (thisImage !== undefined) {
     return (
       <Row>
-        <Image src={`${thisImage.url}/640/480`} fluid />
+        <img alt="" className={grayscale} src={`${thisImage.url}/640/480`} />
       </Row>
     )
   } else {
