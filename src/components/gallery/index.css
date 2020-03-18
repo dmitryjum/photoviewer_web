@@ -1,0 +1,16 @@
+#gallery {
+  margin: 10px 50px;
+}
+
+#gallery img {
+  transition: 0.5s;
+  margin: 10px;
+  width: 200px;
+  box-shadow: 10px 10px 10px grey;
+}
+
+#gallery img:hover {
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
+  transform: scale(1.1);
+}

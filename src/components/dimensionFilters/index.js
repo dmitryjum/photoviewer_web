@@ -15,7 +15,7 @@ const DimensionFilters = () => {
   
 
   return (
-    <Nav variant="pills" defaultActiveKey="/">
+    <Nav variant="pills" defaultActiveKey="0">
       <Nav.Item key={0}>
         <Nav.Link eventKey="0" href="/">Home</Nav.Link>
       </Nav.Item>

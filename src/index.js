@@ -6,7 +6,6 @@ import ImageShow from './components/imageShow';
 import ImageModal from './components/imageModal';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container } from 'react-bootstrap';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
 import configureStore from "./store";
@@ -18,10 +17,8 @@ const Layout = () => {
   return(
     <Provider store={store}>
       <Router>
-        <Container>
-            <Route exact strict path="/" component={Home} />
-            <Route path="/images/:id" component={ImageShow} />
-        </Container>
+        <Route exact strict path="/" component={Home} />
+        <Route path="/images/:id" component={ImageShow} />
       </Router>
       <ImageModal />
     </Provider>
