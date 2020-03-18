@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ButtonGroup, Button, Row } from 'react-bootstrap'
 import PVApi from "../../utils/api";
 import { useDispatch } from "react-redux";
-import { requestImages } from "../../actions/gallery";
+import { requestFilteredImages } from "../../actions/gallery";
 
 const DimensionFilters = () => {
   const [dimensions, setDimensions] = useState([])
@@ -22,7 +22,7 @@ const DimensionFilters = () => {
             <Button
               key={id}
               size="lg"
-              onClick={() => dispatch(requestImages({dimensions: dim}))}
+              onClick={() => dispatch(requestFilteredImages({dimensions: dim}))}
             >
                 {dim}
             </Button>
