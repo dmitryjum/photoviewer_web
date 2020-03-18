@@ -11,6 +11,10 @@ class PVApi {
   static getDimensions() {
     return axios.get(`${constants.PHOTOVIEWER_API_LOCAL_HOST}/v1/images/dimensions`)
   }
+
+  static getImage(id) {
+    return axios.get(`${constants.PHOTOVIEWER_API_LOCAL_HOST}/v1/images/${id}`)
+  }
 }
 
 export default PVApi
