@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { ButtonGroup, Button, Row } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 import PVApi from "../../utils/api";
 import { useDispatch } from "react-redux";
 import { requestFilteredImages } from "../../actions/gallery";
+import './index.css';
 
 const DimensionFilters = () => {
   const [dimensions, setDimensions] = useState([])
@@ -15,21 +16,25 @@ const DimensionFilters = () => {
   
 
   return (
-    <Row>
-      <ButtonGroup vertical>
-        {
-          dimensions.map((dim, id) => (
-            <Button
-              key={id}
-              size="lg"
-              onClick={() => dispatch(requestFilteredImages({dimensions: dim}))}
+    <Nav className="top-fixed" variant="pills" defaultActiveKey="0">
+      <Nav.Item key={0}>
+        <Nav.Link eventKey="0" href="/">Home</Nav.Link>
+      </Nav.Item>
+      {
+        dimensions.map((dim, id) => (
+          <Nav.Item key={id + 1}>
+            <Nav.Link
+              eventKey={id + 1}
+              onClick={() => {
+                dispatch(requestFilteredImages({dimensions: dim}))
+              }}
             >
                 {dim}
-            </Button>
-          ))
-        }
-      </ButtonGroup>
-    </Row>
+            </Nav.Link>
+          </Nav.Item>
+        ))
+      }
+    </Nav>
   );
 }
 
