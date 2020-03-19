@@ -26,7 +26,7 @@ const Gallery = () => {
       dispatch(addMoreImages());
     }
   }, [dispatch, loading, loadedImagesCount, entriesCountInDB])
-  
+
   useEffect(() => {
     if (entriesCountInDB === null) {
        dispatch(requestImages())

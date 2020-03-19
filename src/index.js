@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './components/home';
-import ImageShow from './components/imageShow';
-import ImageModal from './components/imageModal';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from './serviceWorker';
@@ -17,10 +15,9 @@ const Layout = () => {
   return(
     <Provider store={store}>
       <Router>
-        <Route exact strict path="/" component={Home} />
-        <Route path="/images/:id" component={ImageShow} />
+        <Route exact path="/" component={Home} />
+        <Route path="/images/:id" component={Home} />
       </Router>
-      <ImageModal />
     </Provider>
   )
 }

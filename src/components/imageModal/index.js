@@ -29,3 +29,14 @@ function ImageModal() {
 }
 
 export default ImageModal;
+
+// .grayscale {
+//   filter: gray;
+//   -webkit - filter: grayscale(1);
+//   filter: grayscale(1)
+// }
+
+// .grayscale: hover {
+//   -webkit - filter: grayscale(0);
+//   filter: none;
+// }
