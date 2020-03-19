@@ -9,7 +9,7 @@
 #gallery img {
   transition: 0.5s;
   margin: 10px;
-  max-width: 90%;
+  max-width: 95%;
   box-shadow: 10px 10px 10px grey;
 }
 

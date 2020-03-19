@@ -10,6 +10,7 @@ function ImageModal() {
   const currentImage = useSelector(state => state.imageModal.currentImage)
   const fetchError = useSelector(state => state.imageModal.error)
   const [toggleGrayScale, setToggleGrayScale] = useState(false);
+  const [customFilter, setCustomFilter] = useState("900/400")
 
   const params = useParams()
   const imageId = params["id"]
@@ -24,10 +25,6 @@ function ImageModal() {
       setToggleGrayScale(true)
     }
   }, [dispatch, imageId, setToggleGrayScale, location.search])
-
-  function grayscaleImage() {
-    if (toggleGrayScale) { return 'grayscale'}
-  }
   
   const closeModalHandler = () => {
     dispatch(closeModal());
@@ -41,17 +38,26 @@ function ImageModal() {
       )
     } else {
       return (
-        <><img className="modal-image" alt="" src={`${currentImage.url}/900/400`} /></>
+        <><img className="modal-image" alt="" src={`${currentImage.url}/${customFilter}`} /></>
       )
     }
   }
-
+  
   return (
     <div className={`image-lightbox ${modalShow ? 'show' : ''}`}>
-      <div className={`image-lightbox__content ${grayscaleImage()}`}>
+      <div className={`image-lightbox__content ${toggleGrayScale ? 'grayscale' : ''}`}>
         <span className="close-lightbox" onClick={closeModalHandler}
         ></span>
         <span className="grayscale-button" onClick={() => setToggleGrayScale(!toggleGrayScale)}></span>
+        <div className="dimension-buttons">
+          {
+            currentImage.dimensions.map((d, id) => {
+              return (
+                <span key={id} onClick={() => setCustomFilter(d)} className="dimension-button">{d}</span>
+              )
+            })
+          }
+        </div>
         <div className="lightbox-image-container">
           {renderImageOrError()}
         </div>

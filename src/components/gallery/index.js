@@ -66,9 +66,9 @@ const Gallery = () => {
     <>
       <div id="gallery">
         {images.map((image, id) => (
-            <Link to={`/images/${image.id}`} key={id}>
-              <img alt="" variant="top" src={`${image.url}/1024/768`} onLoad={() => dispatch(imagePainted())} />
-            </Link>
+          <Link to={`/images/${image.id}`} key={id}>
+            <img alt="" variant="top" src={`${image.url}/1024/768`} onLoad={() => dispatch(imagePainted())} />
+          </Link>
         ))}
       </div>
       {loadingSpinner()}

@@ -32,6 +32,24 @@
   transform: scale(1,1);
 }
 
+.dimension-buttons {
+  position: absolute;
+  height: 2em;
+  bottom: 1.5em;
+  left: 4em;
+}
+
+.dimension-button {
+  border-width: 2em;
+  height: 100%;
+  border-radius: 20%;
+  text-decoration: none;
+  cursor: pointer;
+  background: green;
+  margin: 0 10px;
+  padding: 4px;
+}
+
 .close-lightbox, .grayscale-button {
   position: absolute;
   width: 2em;
