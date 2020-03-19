@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModal, openModal } from "../../actions/imageModal";
-import { useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation, useHistory } from 'react-router-dom'
 import './index.css'
 
 function ImageModal() {
@@ -14,7 +14,7 @@ function ImageModal() {
   const params = useParams()
   const imageId = params["id"]
   const location = useLocation()
-  
+  const history = useHistory();
   useEffect(() => {
     if (imageId) {
       dispatch(openModal(imageId))
@@ -23,10 +23,15 @@ function ImageModal() {
     if (location.search === "?grayscale") {
       setToggleGrayScale(true)
     }
-  }, [dispatch, imageId, setToggleGrayScale])
+  }, [dispatch, imageId, setToggleGrayScale, location.search])
 
   function grayscaleImage() {
     if (toggleGrayScale) { return 'grayscale'}
+  }
+  
+  const closeModalHandler = () => {
+    dispatch(closeModal());
+    history.push('/');
   }
 
   function renderImageOrError() {
@@ -44,7 +49,8 @@ function ImageModal() {
   return (
     <div className={`image-lightbox ${modalShow ? 'show' : ''}`}>
       <div className={`image-lightbox__content ${grayscaleImage()}`}>
-        <span className="close-lightbox" onClick={() => dispatch(closeModal())}></span>
+        <span className="close-lightbox" onClick={closeModalHandler}
+        ></span>
         <span className="grayscale-button" onClick={() => setToggleGrayScale(!toggleGrayScale)}></span>
         <div className="lightbox-image-container">
           {renderImageOrError()}
