@@ -17,12 +17,12 @@ const Gallery = () => {
   const onScrollHandler = useCallback((e) => {
     e.stopPropagation()
     const currentCur = window.innerHeight + document.documentElement.scrollTop;
-    const offSetHeight = document.documentElement.offsetHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
     // if nothing is currently being loaded over ajax;
-    // there are less images loaded than there are total in collection per request
+    // if there are less images loaded than there are total in collection per request
     // if document height is the same as window height + how much you've scrolled,
     // that means you've scrolled to the bottom
-    if (loading === false && loadedImagesCount < entriesCountInDB && currentCur === offSetHeight) {
+    if (loading === false && loadedImagesCount < entriesCountInDB && currentCur === scrollHeight) {
       dispatch(addMoreImages());
     }
   }, [dispatch, loading, loadedImagesCount, entriesCountInDB])
@@ -32,7 +32,7 @@ const Gallery = () => {
        dispatch(requestImages())
     }
     const windowHeight = window.innerHeight;
-    const galleryLoadedHeight = document.getElementById('gallery').offsetHeight;
+    const galleryLoadedHeight = document.getElementById('gallery').scrollHeight;
     // Should load more images, if the first page loaded less images than the size of the screen and there's no scroll
     // if the count of loaded images greater than 0;
     // if the count of loaded images finally equal to the count of images visibally painted on the screen;
@@ -66,9 +66,9 @@ const Gallery = () => {
     <>
       <div id="gallery">
         {images.map((image, id) => (
-          <Link to={`/images/${image.id}`} key={id}>
-            <img alt="" variant="top" src={`${image.url}/300/300`} onLoad={() => dispatch(imagePainted())} />
-          </Link>
+            <Link to={`/images/${image.id}`} key={id}>
+              <img alt="" variant="top" src={`${image.url}/1024/768`} onLoad={() => dispatch(imagePainted())} />
+            </Link>
         ))}
       </div>
       {loadingSpinner()}

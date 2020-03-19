@@ -1,11 +1,15 @@
 #gallery {
-  margin: 10px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 1em;
+  padding: 1em;
+  background-color: antiquewhite;
 }
 
 #gallery img {
   transition: 0.5s;
   margin: 10px;
-  width: 200px;
+  max-width: 90%;
   box-shadow: 10px 10px 10px grey;
 }
 

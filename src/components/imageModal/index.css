@@ -1,14 +1,75 @@
 .modal-image {
-  width: 100%;
+  max-width: 100%;
 }
+.image-lightbox {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.5);
+  color: white;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0,0);
+  transform-origin: top;
+  transition: transform ease-in-out 300ms;
+}
+
+.image-lightbox__content {
+  background: black;
+  padding: 1em;
+  position: relative
+}
+
+.lightbox-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.show {
+  transform: scale(1,1);
+}
+
+.close-lightbox, .grayscale-button {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  bottom: 1.5em;
+}
+
+.close-lightbox {
+  right: 1.5em;
+  background: red;
+}
+
+.close-lightbox:after {
+  content: 'X';
+  color: white;
+  font-weight: 700;
+}
+
+.grayscale-button {
+  right: 4em;
+  background: gray;
+}
+
+.grayscale-button:after {
+  content: 'G';
+  color: white;
+  font-weight: 700;
+}
+  
 
 .grayscale {
   filter: gray;
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
 }
-
-.grayscale: hover {
-  -webkit-filter: grayscale(0);
-  filter: none;
- }

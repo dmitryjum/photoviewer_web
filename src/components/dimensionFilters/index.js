@@ -3,6 +3,7 @@ import { Nav } from 'react-bootstrap'
 import PVApi from "../../utils/api";
 import { useDispatch } from "react-redux";
 import { requestFilteredImages } from "../../actions/gallery";
+import './index.css';
 
 const DimensionFilters = () => {
   const [dimensions, setDimensions] = useState([])

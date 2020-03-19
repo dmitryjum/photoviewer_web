@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { closeModal, openModal } from "../../actions/imageModal";
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import './index.css'
 
 function ImageModal() {
@@ -10,15 +9,25 @@ function ImageModal() {
   const modalShow = useSelector(state => state.imageModal.show)
   const currentImage = useSelector(state => state.imageModal.currentImage)
   const fetchError = useSelector(state => state.imageModal.error)
+  const [toggleGrayScale, setToggleGrayScale] = useState(false);
 
   const params = useParams()
   const imageId = params["id"]
-
- useEffect(() => {
+  const location = useLocation()
+  
+  useEffect(() => {
     if (imageId) {
       dispatch(openModal(imageId))
     }
-  }, [dispatch, imageId])
+
+    if (location.search === "?grayscale") {
+      setToggleGrayScale(true)
+    }
+  }, [dispatch, imageId, setToggleGrayScale])
+
+  function grayscaleImage() {
+    if (toggleGrayScale) { return 'grayscale'}
+  }
 
   function renderImageOrError() {
     if (fetchError) {
@@ -27,31 +36,21 @@ function ImageModal() {
       )
     } else {
       return (
-        <><img className="modal-image" alt="" src={`${currentImage.url}/640/480`} /></>
+        <><img className="modal-image" alt="" src={`${currentImage.url}/900/400`} /></>
       )
     }
   }
 
   return (
-    <Modal
-      show={modalShow}
-      onHide={() => dispatch(closeModal())}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {renderImageOrError()}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={() => dispatch(closeModal())}>Close</Button>
-      </Modal.Footer>
-    </Modal>
+    <div className={`image-lightbox ${modalShow ? 'show' : ''}`}>
+      <div className={`image-lightbox__content ${grayscaleImage()}`}>
+        <span className="close-lightbox" onClick={() => dispatch(closeModal())}></span>
+        <span className="grayscale-button" onClick={() => setToggleGrayScale(!toggleGrayScale)}></span>
+        <div className="lightbox-image-container">
+          {renderImageOrError()}
+        </div>
+      </div>
+    </div>
   );
 }
 
