@@ -1,4 +1,14 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
+
+This project features responsive image gallery that is fetched from *photoviewer-api* Rails application. <br />
+User can view the gallery, experience infinite scroll on the page, filter images by available dimensions per image, also view an image in a "lightbox" modal.<br />
+"lightbox" type modal allows user to transform the image with grayscale filter and view the image in other dimensions.<br />
+
+## Libraries that were used to build it:
+1. Node v11.10.0 (Node 8.16.0 or 10.16.0 or later are required to run the app locally)
+2. React 16.13.0
+3. Redux 4.0.5
+4. React-redux 7.2.0
 
 ## Available Scripts
 
@@ -11,6 +21,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+`**Important**`<br />
+Make sure you are running *photoviewer-api* Rails application on port 3001
 
 ### `npm test`
 
