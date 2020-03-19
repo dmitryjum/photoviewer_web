@@ -11,7 +11,7 @@ export function openModal(id) {
     } else {
       PVApi.getImage(id)
         .then(resp => {
-          openModalWithImageThunk({currentImage: resp.data, show: true})
+          dispatch(openModalWithImageThunk({currentImage: resp.data, show: true}))
         })
         .catch(error => setFetchErrorThunk({error}))
     }
